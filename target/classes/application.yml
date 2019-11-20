@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5436/data
+    username: data
+    password: data
+    hikari:
+      minimum-idle: 2
+      maximum-pool-size: 5
+      maxLifetime: 60000
+      connection-init-sql:
+  jpa:
+    properties:
+      jdbc:
+        lob:
+          non_contextual_creation: true
+      hibernate:
+        enable_lazy_load_no_trans: true
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    hibernate:
+      ddl-auto: none
+      dialect: com.moex.mp.supplier.hibernate.dialect.CustomPostgreSQLDialect
+      hbm2ddl:
+        auto: none
+  liquibase:
+    change-log: classpath:db/liquibase-changelog.xml
