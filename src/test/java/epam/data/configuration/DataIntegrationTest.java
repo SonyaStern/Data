@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 @SpringBootTest(
         classes = DataApplication.class,
         properties = {
-                "spring.datasource.url=jdbc:tc:postgresql:10.7-alpine:///databasename",
+                "spring.datasource.url=jdbc:tc:postgresql:10.7-alpine:///data",
                 "spring.datasource.driver-class-name=org.testcontainers.jdbc.ContainerDatabaseDriver",
         }
 )

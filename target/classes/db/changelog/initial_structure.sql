@@ -5,15 +5,12 @@ DROP TABLE IF EXISTS complaint;
 
 create table complaint
 (
-	id bigint not null
-		constraint complaint_pkey
-			primary key,
 	received date,
 	product_name varchar(255),
 	sub_product varchar(255),
 	issue varchar(255),
 	sub_issue varchar(255),
-	narrative varchar(255),
+	narrative varchar(4500),
 	public_response varchar(255),
 	company varchar(255),
 	state_name varchar(255),
@@ -24,6 +21,9 @@ create table complaint
 	sent date,
 	response_to_consumer varchar(255),
 	timely_response varchar(255),
-	consumer_disputed varchar(255)
+	consumer_disputed varchar(255),
+	id bigint not null
+		constraint complaint_pkey
+			primary key
 );
 --rollback DROP TABLE complaint;

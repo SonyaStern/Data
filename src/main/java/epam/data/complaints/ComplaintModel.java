@@ -19,9 +19,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ComplaintModel {
 
-    @Id
-    @Column(name = "id")
-    private Long complaintID;
     private LocalDate received;
     @Column(name = "product_name")
     private String productName;
@@ -50,5 +47,8 @@ public class ComplaintModel {
     private String timelyResponse;
     @Column(name = "consumer_disputed")
     private String consumerDisputed;
+    @Id
+    @Column(name = "id")
+    private Long complaintID;
 
 }
