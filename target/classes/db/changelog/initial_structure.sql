@@ -1,9 +1,9 @@
 --liquibase formatted sql
 --changeset sofia_krylova@epam.com:1
 
-DROP TABLE IF EXISTS complaint;
+DROP TABLE IF EXISTS complaints;
 
-create table complaint
+create table complaints
 (
 	received date,
 	product_name varchar(255),
@@ -26,4 +26,4 @@ create table complaint
 		constraint complaint_pkey
 			primary key
 );
---rollback DROP TABLE complaint;
+--rollback DROP TABLE complaints;

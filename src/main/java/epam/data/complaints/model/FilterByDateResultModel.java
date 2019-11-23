@@ -22,7 +22,7 @@ public class FilterByDateResultModel {
     @Column(name = "number_of_complaints")
     private int numberOfComplaints;
     @Column(name = "number_of_complaints_with_timely_response")
-    String numberOfComplaintsWithTimelyResponse;
+    private int numberOfComplaintsWithTimelyResponse;
     @Column(name = "number_of_complaints_disputed_by_customer")
-    String numberOfComplaintsDisputedByCustomer;
+    private int numberOfComplaintsDisputedByCustomer;
 }

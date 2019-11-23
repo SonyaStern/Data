@@ -1,10 +1,10 @@
 package epam.data.complaints.repository;
 
 import epam.data.complaints.FileLoader;
-import epam.data.complaints.FilterByDateSpecification;
-import epam.data.complaints.filter.DateFilter;
 import epam.data.complaints.model.FilterByDateResultModel;
 import epam.data.configuration.DataIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,31 +20,29 @@ class FilterByDateRepositoryTest {
     private FilterByDateRepository filterByDateRepository;
     @Autowired
     private FileLoader fileLoader;
+    @Autowired
+    private ComplaintRepository complaintRepository;
 
     @BeforeEach
     void setUp() throws SQLException {
         fileLoader.loadData();
     }
 
-    @Test
-    void test() {
-        DateFilter dateFilter = DateFilter
-                .builder()
-                .fromDate(LocalDate.of(2013, 7, 29))
-                .toDate(LocalDate.of(2013, 7, 31))
-                .build();
-        List<FilterByDateResultModel> results = filterByDateRepository.findAll(new FilterByDateSpecification(dateFilter));
-        System.out.println(results);
-        for (FilterByDateResultModel result : results) {
-            System.out.println(result.getProductName() + " | " + result.getNumberOfComplaints());
-        }
+    @AfterEach
+    void tearDown() {
+        complaintRepository.deleteAll();
     }
 
     @Test
     void test2() {
         List<FilterByDateResultModel> allByDate = filterByDateRepository.getAllByDate(LocalDate.of(2013, 7, 29), LocalDate.of(2013, 8, 31));
         for (FilterByDateResultModel result : allByDate) {
-            System.out.println(result.getProductName() + " | " + result.getNumberOfComplaints() + " | " + result.getNumberOfComplaintsWithTimelyResponse() + " | " + result.getNumberOfComplaintsDisputedByCustomer());
+            System.out.println(result.getProductName() + " | "
+                    + result.getNumberOfComplaints() + " | "
+                    + result.getNumberOfComplaintsWithTimelyResponse() + " | "
+                    + result.getNumberOfComplaintsDisputedByCustomer());
+            Assertions.assertTrue(result.getNumberOfComplaints() >= result.getNumberOfComplaintsWithTimelyResponse());
+            Assertions.assertTrue(result.getNumberOfComplaints() >= result.getNumberOfComplaintsDisputedByCustomer());
         }
     }
 }
