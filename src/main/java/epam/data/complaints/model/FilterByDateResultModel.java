@@ -21,7 +21,8 @@ public class FilterByDateResultModel {
     private String productName;
     @Column(name = "number_of_complaints")
     private int numberOfComplaints;
-//    private LocalDate received;
-//    String numberOfComplaintsWithTimelyResponse;
-//    String numberOfComplaintsDisputedByCustomer;
+    @Column(name = "number_of_complaints_with_timely_response")
+    String numberOfComplaintsWithTimelyResponse;
+    @Column(name = "number_of_complaints_disputed_by_customer")
+    String numberOfComplaintsDisputedByCustomer;
 }

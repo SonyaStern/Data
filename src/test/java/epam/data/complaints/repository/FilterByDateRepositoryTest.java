@@ -44,7 +44,7 @@ class FilterByDateRepositoryTest {
     void test2() {
         List<FilterByDateResultModel> allByDate = filterByDateRepository.getAllByDate(LocalDate.of(2013, 7, 29), LocalDate.of(2013, 8, 31));
         for (FilterByDateResultModel result : allByDate) {
-            System.out.println(result.getProductName() + " | " + result.getNumberOfComplaints());
+            System.out.println(result.getProductName() + " | " + result.getNumberOfComplaints() + " | " + result.getNumberOfComplaintsWithTimelyResponse() + " | " + result.getNumberOfComplaintsDisputedByCustomer());
         }
     }
 }
