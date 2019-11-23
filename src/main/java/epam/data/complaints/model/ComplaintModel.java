@@ -1,4 +1,4 @@
-package epam.data.complaints;
+package epam.data.complaints.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name = "complaint")
+@Table(name = "complaints")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
