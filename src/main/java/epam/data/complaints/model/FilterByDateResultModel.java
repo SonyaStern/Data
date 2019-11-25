@@ -1,17 +1,16 @@
 package epam.data.complaints.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "filter_by_date_view")
+@Table(name = "filter_by_date")
 @AllArgsConstructor
 @NoArgsConstructor
 public class FilterByDateResultModel {

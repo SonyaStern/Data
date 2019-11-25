@@ -2,12 +2,11 @@ package epam.data.complaints;
 
 import epam.data.complaints.repository.ComplaintRepository;
 import epam.data.configuration.DataIntegrationTest;
+import java.sql.SQLException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.sql.SQLException;
 
 @DataIntegrationTest
 class FileLoaderTest {
@@ -19,7 +18,7 @@ class FileLoaderTest {
 
     @AfterEach
     void tearDown() {
-        complaintRepository.deleteAll();
+        complaintRepository.truncateTable();
     }
 
     @Test
