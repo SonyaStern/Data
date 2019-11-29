@@ -1,14 +1,16 @@
 package epam.data.complaints.repository;
 
-import epam.data.complaints.FileLoader;
+import epam.data.complaints.ComplaintFileLoader;
 import epam.data.complaints.model.FilterByCompanyResultModel;
 import epam.data.configuration.DataIntegrationTest;
-import java.sql.SQLException;
-import java.util.List;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.sql.SQLException;
+import java.util.List;
 
 @DataIntegrationTest
 class FilterByCompanyRepositoryTest {
@@ -16,13 +18,13 @@ class FilterByCompanyRepositoryTest {
   @Autowired
   private FilterByCompanyRepository filterByCompanyRepository;
   @Autowired
-  private FileLoader fileLoader;
+  private ComplaintFileLoader complaintFileLoader;
   @Autowired
   private ComplaintRepository complaintRepository;
 
   @BeforeEach
   void setUp() throws SQLException {
-    fileLoader.loadData();
+    complaintFileLoader.loadData();
   }
 
   @AfterEach
@@ -37,6 +39,6 @@ class FilterByCompanyRepositoryTest {
       System.out.println(result.getStateName() + " | "
           + result.getNumberOfComplaints());
     }
-
+    Assertions.assertNotEquals(0, allByCompany.size());
   }
 }

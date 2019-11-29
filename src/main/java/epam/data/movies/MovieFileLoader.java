@@ -1,4 +1,4 @@
-package epam.data.complaints;
+package epam.data.movies;
 
 import lombok.RequiredArgsConstructor;
 import org.postgresql.PGConnection;
@@ -10,24 +10,24 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import static epam.data.utils.DataConstants.URL;
+import static epam.data.utils.DataConstants.USER_PASS;
+
 @Component
 @RequiredArgsConstructor
-public class FileLoader {
+public class MovieFileLoader {
 
+    @SuppressWarnings("Duplicates")
     public void loadData() throws SQLException {
-        Connection connection = DriverManager.getConnection(
-                "jdbc:tc:postgresql:10.7-alpine:///data", "data",
-                "data");
+        Connection connection = DriverManager.getConnection(URL, USER_PASS, USER_PASS);
         CopyManager copyManager = connection.unwrap(PGConnection.class).getCopyAPI();
 
-        String copyCommand = "COPY complaints(received, product_name, sub_product, issue, sub_issue, "
-                + "narrative, public_response, company, state_name, zip_code, tags, consent_provided, submitted_via, "
-                + "sent, response_to_consumer, timely_response, consumer_disputed, id) "
+        String copyCommand = "COPY movies "
                 + "FROM STDIN "
                 + "WITH (DELIMITER ',', FORMAT csv, HEADER)";
 
-    long before = System.nanoTime();
-    System.out.println(before);
+        long before = System.nanoTime();
+        System.out.println(before);
 
         try {
             copyManager.copyIn(copyCommand, getClass().getClassLoader().getResource("ConsumerComplaints.csv").openStream());
@@ -35,8 +35,8 @@ public class FileLoader {
             e.printStackTrace();
         }
 
-    long after = System.nanoTime();
-    System.out.println(after);
-    System.out.println(after - before);
-  }
+        long after = System.nanoTime();
+        System.out.println(after);
+        System.out.println(after - before);
+    }
 }

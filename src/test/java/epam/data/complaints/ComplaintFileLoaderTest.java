@@ -2,17 +2,18 @@ package epam.data.complaints;
 
 import epam.data.complaints.repository.ComplaintRepository;
 import epam.data.configuration.DataIntegrationTest;
-import java.sql.SQLException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.SQLException;
+
 @DataIntegrationTest
-class FileLoaderTest {
+class ComplaintFileLoaderTest {
 
     @Autowired
-    private FileLoader fileLoader;
+    private ComplaintFileLoader complaintFileLoader;
     @Autowired
     private ComplaintRepository complaintRepository;
 
@@ -23,7 +24,7 @@ class FileLoaderTest {
 
     @Test
     void loadData() throws SQLException {
-        fileLoader.loadData();
+        complaintFileLoader.loadData();
         Assertions.assertNotEquals(0, complaintRepository.findAll().size());
     }
 }
