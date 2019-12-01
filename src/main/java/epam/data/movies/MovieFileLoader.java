@@ -1,5 +1,6 @@
 package epam.data.movies;
 
+import epam.data.movies.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.postgresql.PGConnection;
 import org.postgresql.copy.CopyManager;
@@ -17,26 +18,22 @@ import static epam.data.utils.DataConstants.USER_PASS;
 @RequiredArgsConstructor
 public class MovieFileLoader {
 
+    private final MovieRepository movieRepository;
+
     @SuppressWarnings("Duplicates")
     public void loadData() throws SQLException {
         Connection connection = DriverManager.getConnection(URL, USER_PASS, USER_PASS);
         CopyManager copyManager = connection.unwrap(PGConnection.class).getCopyAPI();
 
-        String copyCommand = "COPY movies "
+        String copyCommand = "COPY temp_movies "
                 + "FROM STDIN "
                 + "WITH (DELIMITER ',', FORMAT csv, HEADER)";
 
-        long before = System.nanoTime();
-        System.out.println(before);
-
         try {
-            copyManager.copyIn(copyCommand, getClass().getClassLoader().getResource("ConsumerComplaints.csv").openStream());
+            copyManager.copyIn(copyCommand, getClass().getClassLoader().getResource("movie_metadata.csv").openStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        long after = System.nanoTime();
-        System.out.println(after);
-        System.out.println(after - before);
+        movieRepository.insertData();
     }
 }

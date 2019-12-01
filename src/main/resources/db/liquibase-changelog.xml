@@ -7,4 +7,5 @@
     <include file="changelog/create_complaints_table.sql" relativeToChangelogFile="true"/>
     <include file="changelog/filter_by_date.sql" relativeToChangelogFile="true"/>
     <include file="changelog/filter_by_company.sql" relativeToChangelogFile="true"/>
+    <include file="changelog/create_movies_table.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
